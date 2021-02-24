@@ -7,11 +7,14 @@ public class PlayerController : MonoBehaviour
 
     public CharacterController controller;
     public Transform cam;
+    public Animator ani;
 
     public float speed = 6f;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+
+    public bool isWalking = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +36,15 @@ public class PlayerController : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir * speed * Time.deltaTime);
+            isWalking = true;
+        }
+        else
+        {
+            isWalking = false;
         }
 
+        ani.SetBool("isWalking", isWalking);
     }
+
+    
 }
